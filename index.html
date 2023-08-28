@@ -6,6 +6,17 @@
     <title>정동고 제 38회 축제!!!</title>
 </head>
 <style>
+    body
+    { margin: 0;} .container {
+    /* transition: all 0.5s; */ 
+} .box {
+    /* 아래 두줄은 제이쿼리 부분에서 box에 css 주는거 없을때 필요 */ /* float: left; width: calc(100% / 4); */ 
+    height: 100vh;
+    font-size: 100px; 
+    line-height: 100vh; 
+    text-align: center; border: 10px solid; 
+    box-sizing: border-box;
+} 
     .wrapper {
         display: flex;
         align-items: center;
@@ -41,20 +52,36 @@
 
 
 
-<style> body
-    { margin: 0;} .container {
-    /* transition: all 0.5s; */ 
-} .box {
-    /* 아래 두줄은 제이쿼리 부분에서 box에 css 주는거 없을때 필요 */ /* float: left; width: calc(100% / 4); */ 
-    height: 100vh;
-    font-size: 100px; 
-    line-height: 100vh; 
-    text-align: center; border: 10px solid; 
-    box-sizing: border-box;
-} </style>
 
 
-<script> $(document).ready(function(){ 
+
+<script> 
+    
+    const goalDate = new Date("2023-10-27").getTime();
+
+    function calcDate() {
+        const now = new Date().getTime();
+        const distance = goalDate - now;
+
+        var days = Math.floor(distance / (1000*60*60*24));
+        var hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+        var minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+        var seconds = Math.floor((distance % (1000*60)) / 1000);
+
+        if (distance < 0) {
+            return '(지나감)';
+        } else {
+            return `${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남음!!!`;
+        }
+    }
+    
+    setInterval(() => {
+        document.getElementById('count').innerText = calcDate();
+    }, 1000);
+
+
+    
+    $(document).ready(function(){ 
     let d_width = 0; 
     // 브라우저 가로
     let d_height = 0; 
@@ -123,27 +150,3 @@
 </div>
 </body>
 </html>
-<script>
-    const goalDate = new Date("2023-10-27").getTime();
-
-    function calcDate() {
-        const now = new Date().getTime();
-        const distance = goalDate - now;
-
-        var days = Math.floor(distance / (1000*60*60*24));
-        var hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-        var minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
-        var seconds = Math.floor((distance % (1000*60)) / 1000);
-
-        if (distance < 0) {
-            return '(지나감)';
-        } else {
-            return `${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남음!!!`;
-        }
-    }
-    
-    setInterval(() => {
-        document.getElementById('count').innerText = calcDate();
-    }, 1000);
-
-</script>
